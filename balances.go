@@ -7,6 +7,7 @@ import (
 	"github.com/ozontech/allure-go/pkg/framework/provider"
 )
 
+// EmitGetTxIDAndCheckBalance emits amount of tokens to userAddressBase58Check and checks that balance is equal to amount
 func EmitGetTxIDAndCheckBalance(
 	t provider.T,
 	hlfProxy HlfProxyService,
@@ -31,6 +32,7 @@ func EmitGetTxIDAndCheckBalance(
 	return txID
 }
 
+// EmitGetResponseAndCheckBalance emits amount of tokens to userAddressBase58Check and checks that balance is equal to amount
 func EmitGetResponseAndCheckBalance(
 	t provider.T,
 	hlfProxy HlfProxyService,
@@ -54,6 +56,7 @@ func EmitGetResponseAndCheckBalance(
 	return res
 }
 
+// CheckBalanceEqual checks that balance of userAddressBase58Check is equal to amount
 func CheckBalanceEqual(t provider.T, hlfProxy HlfProxyService, userAddressBase58Check string, channel string, amount string) {
 	t.WithNewStep("Checking that balance equal "+amount, func(sCtx provider.StepCtx) {
 		respGetBalance, err := hlfProxy.Query(channel, "balanceOf", userAddressBase58Check)
@@ -62,6 +65,7 @@ func CheckBalanceEqual(t provider.T, hlfProxy HlfProxyService, userAddressBase58
 	})
 }
 
+// CheckAllowedBalanceEqual checks that allowed balance of userAddressBase58Check is equal to amount
 func CheckAllowedBalanceEqual(t provider.T, hlfProxy HlfProxyService, userAddressBase58Check string, channel string, tokenUppercase string, amount string) {
 	t.WithNewStep("Checking that allowed balance equal "+amount, func(sCtx provider.StepCtx) {
 		resp, err := hlfProxy.Query(channel, "allowedBalanceOf", userAddressBase58Check, tokenUppercase)
@@ -70,6 +74,7 @@ func CheckAllowedBalanceEqual(t provider.T, hlfProxy HlfProxyService, userAddres
 	})
 }
 
+// CheckBalanceEqualWithRetry checks that balance of userAddressBase58Check is equal to amount with retries
 func CheckBalanceEqualWithRetry(t provider.T, hlfProxy HlfProxyService, userAddressBase58Check string, channel string, amount string, sleep time.Duration, retries int) {
 	t.WithNewStep("Checking that balance equal "+amount+" with retry", func(sCtx provider.StepCtx) {
 		i := 0
@@ -88,6 +93,7 @@ func CheckBalanceEqualWithRetry(t provider.T, hlfProxy HlfProxyService, userAddr
 	})
 }
 
+// TransferCheckBalanceAndGetRespose transfers amount of tokens from userFrom to userToAddress and checks that balance of userToAddress is equal to amount
 func TransferCheckBalanceAndGetRespose(
 	t provider.T,
 	hlfProxy HlfProxyService,
@@ -120,6 +126,7 @@ func TransferCheckBalanceAndGetRespose(
 	return resTransfer
 }
 
+// GetEmitPayload emits amount of tokens to userAddressBase58Check and checks that balance is equal to amount
 func GetEmitPayload(
 	t provider.T,
 	hlfProxy HlfProxyService,
@@ -142,6 +149,7 @@ func GetEmitPayload(
 	return txID
 }
 
+// SwapFiatToCCCheckBalanceAndGetSwapDoneAndSwapBeginTxID swaps amount of tokens from fiat to cc channel
 func SwapFiatToCCCheckBalanceAndGetSwapDoneAndSwapBeginTxID(t provider.T, hlfProxy HlfProxyService, user User, amount string) (string, string) {
 	var (
 		swapBeginTxID string

@@ -9,6 +9,7 @@ import (
 	"net/http"
 )
 
+// RequestPrx struct for request to hlf proxy
 type RequestPrx struct {
 	Args        [][]byte `json:"args"`
 	ChaincodeID string   `json:"chaincodeId"`
@@ -16,10 +17,12 @@ type RequestPrx struct {
 	Opts        *Options `json:"options,omitempty"`
 }
 
+// Options that can be used to specify target endpoints for the transaction invocation.
 type Options struct {
 	TargetEndpoints []string `json:"targetEndpoints"`
 }
 
+// ResponsePrx struct for response from hlf proxy
 type ResponsePrx struct {
 	BlockNumber      int64  `json:"blockNumber,omitempty"`
 	ChaincodeStatus  int64  `json:"chaincodeStatus,omitempty"`
@@ -28,6 +31,7 @@ type ResponsePrx struct {
 	TxValidationCode int64  `json:"txValidationCode,omitempty"`
 }
 
+// ResponseErrorPrx struct for response error from hlf proxy
 type ResponseErrorPrx struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`

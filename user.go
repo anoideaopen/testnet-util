@@ -8,12 +8,14 @@ import (
 	"golang.org/x/crypto/ed25519"
 )
 
+// Issuer struct
 type Issuer struct {
 	IssuerEd25519PrivateKey      ed25519.PrivateKey
 	IssuerEd25519PublicKey       ed25519.PublicKey
 	IssuerEd25519PublicKeyBase58 string
 }
 
+// User struct
 type User struct {
 	UserEd25519PrivateKey  ed25519.PrivateKey
 	UserEd25519PublicKey   ed25519.PublicKey
@@ -21,6 +23,7 @@ type User struct {
 	UserAddressBase58Check string
 }
 
+// AddIssuer adds issuer
 func AddIssuer(t provider.T, hlfProxy HlfProxyService, base58Check string) Issuer {
 	var issuerFiatEd25519PrivateKey ed25519.PrivateKey
 	var issuerFiatEd25519PublicKey ed25519.PublicKey
@@ -50,6 +53,7 @@ func AddIssuer(t provider.T, hlfProxy HlfProxyService, base58Check string) Issue
 	return Issuer{issuerFiatEd25519PrivateKey, issuerFiatEd25519PublicKey, issuerEd25519PublicKeyBase58}
 }
 
+// AddUser adds user
 func AddUser(t provider.T, hlfProxy HlfProxyService) User {
 	var userEd25519PrivateKey ed25519.PrivateKey
 	var userEd25519PublicKey ed25519.PublicKey
@@ -81,6 +85,7 @@ func AddUser(t provider.T, hlfProxy HlfProxyService) User {
 	return User{userEd25519PrivateKey, userEd25519PublicKey, userPublicKeyBase58, userAddressBase58Check}
 }
 
+// GenerateUserPublicKeyBase58 generates user public key base58
 func GenerateUserPublicKeyBase58(t provider.T) string {
 	var userEd25519PublicKey ed25519.PublicKey
 	var err error
@@ -96,6 +101,7 @@ func GenerateUserPublicKeyBase58(t provider.T) string {
 	return userPublicKeyBase58
 }
 
+// AddUserGetResponce adds user and returns response
 func AddUserGetResponce(t provider.T, hlfProxy HlfProxyService) (User, *Response) {
 	var (
 		userEd25519PrivateKey  ed25519.PrivateKey

@@ -35,10 +35,11 @@ const (
 	InvokeTimeout = 10 * time.Second
 	// QueryTimeout sets timeout for query method operations
 	QueryTimeout = 10 * time.Second
-	// QueryTimeout sets timeout for query method operations
+	// MoreNonceTTL sets timeout for nonce
 	MoreNonceTTL = 11 * time.Second
 )
 
+// AsBytes converts string to [][]byte
 func AsBytes(args ...string) [][]byte {
 	bytes := make([][]byte, len(args))
 	for i, arg := range args {
@@ -47,6 +48,7 @@ func AsBytes(args ...string) [][]byte {
 	return bytes
 }
 
+// GetNonce returns nonce
 func GetNonce() string {
 	return strconv.FormatInt(time.Now().UnixMilli(), 10)
 }
@@ -59,17 +61,20 @@ func GetEnv(key, defaultValue string) string {
 	return defaultValue
 }
 
+// CheckStatusCode checks that status code is equal to expected
 func CheckStatusCode(t provider.T, expectedResponseCode int, actualResponseCode int) {
 	t.WithNewStep("Checking that SC is "+strconv.Itoa(expectedResponseCode), func(sCtx provider.StepCtx) {
 		sCtx.Require().Equal(expectedResponseCode, actualResponseCode)
 	})
 }
 
+// FillStructFromBody fills struct from body\
 func FillStructFromBody(t provider.T, body []byte, tt any) {
 	err := json.Unmarshal(body, &tt)
 	t.Require().NoError(err)
 }
 
+// ConvertPemTox509certificate converts pem to x509 certificate
 func ConvertPemTox509certificate(bytes []byte) (*x509.Certificate, error) {
 	block, _ := pem.Decode(bytes)
 	if block == nil {

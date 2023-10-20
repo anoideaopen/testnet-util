@@ -20,6 +20,7 @@ type HlfProxyService struct {
 	authToken string
 }
 
+// NewHlfProxyService - create new instance of HlfProxyService
 func NewHlfProxyService(url string, authToken string) *HlfProxyService {
 	return &HlfProxyService{
 		url:       url,
@@ -106,12 +107,12 @@ func (p *HlfProxyService) sendRequest(requestType string, chaincodeID string, fc
 	return response, nil
 }
 
-// Invoke - send invoke request to hlf through hlf proxy service
+// GetPayloadInvoke - send invoke request to hlf through hlf proxy service
 func (p *HlfProxyService) GetPayloadInvoke(chaincodeID string, fcn string, args ...string) ([]byte, error) {
 	return p.preparePayload("invoke", chaincodeID, fcn, args...)
 }
 
-// Invoke - send invoke request to hlf through hlf proxy service
+// GetPayloadQuery - send query request to hlf through hlf proxy service
 func (p *HlfProxyService) GetPayloadQuery(chaincodeID string, fcn string, args ...string) ([]byte, error) {
 	return p.preparePayload("query", chaincodeID, fcn, args...)
 }

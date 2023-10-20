@@ -4,6 +4,7 @@ import (
 	"strings"
 )
 
+// MakeJSONArrayFromNdJSON converts NDJSON to JSON array
 func MakeJSONArrayFromNdJSON(body []byte) string {
 	lenToCt := 2
 	str := string(body)

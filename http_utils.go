@@ -18,10 +18,12 @@ import (
 // HTTPClient struct
 // url - domain and port for observer service,
 // example http://localhost:3335/api without '/' on the end the string.
+// HTTPClient is used to send requests to observer service.
 type HTTPClient struct {
 	url string
 }
 
+// NewHTTPClient - create new instance of HTTPClient
 func NewHTTPClient(url ...string) *HTTPClient {
 	if len(url) == 1 {
 		return &HTTPClient{
@@ -33,6 +35,7 @@ func NewHTTPClient(url ...string) *HTTPClient {
 	}
 }
 
+// Post - send POST request to observer service
 func (o *HTTPClient) Post(t provider.T, apiPath string, v any) ([]byte, int) {
 	var (
 		resp         *http.Response
@@ -76,6 +79,7 @@ func (o *HTTPClient) Post(t provider.T, apiPath string, v any) ([]byte, int) {
 	return body, sc
 }
 
+// Get - send GET request to observer service
 func (o *HTTPClient) Get(t provider.T, apiPath string) ([]byte, int) {
 	var (
 		body   []byte
@@ -113,6 +117,7 @@ func (o *HTTPClient) Get(t provider.T, apiPath string) ([]byte, int) {
 	return body, sc
 }
 
+// PrepareURL - prepare url for request
 func (o *HTTPClient) PrepareURL(t provider.T, apiPath string) string {
 	u, err := url.Parse(o.url)
 	t.Require().NoError(err)
