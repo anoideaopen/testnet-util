@@ -3,8 +3,8 @@ package transfer
 import (
 	"time"
 
-	"github.com/ozontech/allure-go/pkg/framework/provider"
 	utils "github.com/atomyze-foundation/atomyze-util"
+	"github.com/ozontech/allure-go/pkg/framework/provider"
 )
 
 func ChannelTransferByCustomer(t provider.T, hlfProxy *utils.HlfProxyService, channelFrom string, user utils.User, transferArgs []string) {
